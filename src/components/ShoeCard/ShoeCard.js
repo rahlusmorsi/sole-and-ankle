@@ -36,7 +36,8 @@ const ShoeCard = ({
       <Wrapper className={variant}>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
-          <ProductFlag />
+          {variant === 'on-sale' ? <SaleFlag>Sale</SaleFlag> : undefined}
+          {variant === 'new-release' ? <NewFlag>Just released!</NewFlag> : undefined}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -77,19 +78,14 @@ const ProductFlag = styled.div`
   top: 12px;
   right: -4px;
   width: fit-content;
+`;
 
-  ${Wrapper}.on-sale & {
-    background-color: ${COLORS.primary};
-    &::before {
-      content: "Sale"
-    }
-  }
-  ${Wrapper}.new-release & {
-    background-color: ${COLORS.secondary};
-    &::before {
-      content: "Just released!"
-    }
-  }
+const SaleFlag = styled(ProductFlag)`
+  background-color: ${COLORS.primary};
+`;
+
+const NewFlag = styled(ProductFlag)`
+  background-color: ${COLORS.secondary};
 `;
 
 const Row = styled.div`
